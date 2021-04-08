@@ -14,7 +14,9 @@ const UI = SpreadsheetApp.getUi();
 // Sheet
 const SHEET = SpreadsheetApp.getActiveSheet();
 
-// main function
+/**
+ * Main function that is associated with the button of the SpreadSheet
+ */
 function segmentate() {
     // Gets data
     var data = SS_MAILS.getDataRange().getValues();
@@ -37,19 +39,31 @@ function segmentate() {
     }
 }
 
+/**
+ * Auxiliar function that will segmentate mails depending on the year the student came in
+ * @param num The two digit number needed to know in which year a student entered IPN
+ * @param name The name of the student
+ * @param mail The institutional mail
+ */
 function segmentate(num, name, mail) {
   if (num < 10) {
-    // Segmantate to GF
+    // TODO: Segmantate to GF
   }
   else if (10 <= num < 13) {
-    // Segmantate to oGTa
+    // TODO: Segmantate to oGTa
   }
   else {
-    // Segmantate to oGV
+    // TODO: Segmantate to oGV
   }
 }
 
-// this function only works with contigous hidden rows
+/**
+ * Gets the last hidden row by user in a certain column.
+ * This function only works with contigous hidden rows, i.e.: Rows should go from 2-15, you cannot use it with different ranges like 2-4, 7-10, etc
+ * @param   {SpreadsheetApp.Sheet}  sheet   The sheet where the row index will retrieved
+ * @param   {string}                columnL The letter of the column to analyze
+ * @returns {number}                        The index of the last hidden row by user
+ */
 function getLastHiddenRow(sheet, columnL) {
   var lastHiddenRow = 1; // The row 0 does not count because it's the header
   // Last row, in certain column, with data in it will be the limit
@@ -68,14 +82,18 @@ function getLastHiddenRow(sheet, columnL) {
 
 /**
  * Gets the last row number within a given range
- * @param {Range} A range can be a single cell in a sheet or a group of adjacent cells in a sheet
- * @returns {number} The index of the last row with data in it
+ * @param   {SpreadsheetApp.Range}   range A range can be a single cell in a sheet or a group of adjacent cells in a sheet
+ * @returns {number}                       The index of the last row with data in it
  */
 function getLastRow(range) {
   return range.getValues().filter(String).length;
 }
 
-// 
+/**
+ * Gets the formatted string to have a whole column
+ * @param   {string}  columnL A column letter
+ * @returns {string}          A formatted string based on the column letter, i.e.: "A:A"
+ */
 function getWholeColumnNotation(columnL) {
   return columnL + ":" + columnL;
 }
